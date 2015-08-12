@@ -6,13 +6,19 @@ Type `make` to compile the tools using `gcc`. The scripts go in `bin/`.
 
 ## tweetnacl-keypair
 
+Generates Curve25519 public and secret keys.
+
 Usage:
 
 ```shell
 $ tweetnacl-keypair public.key secret.key
 ```
 
-The `public.key` and `secret.key` files will contain 32 bytes each of the public and secret Curve25519 keys respectively. If either or both of the file names are given as `-` then the key will be printed as hexadecimal (64 bytes) to stdout instead.
+The `public.key` and `secret.key` files will contain 32 bytes each of the public and secret Curve25519 keys respectively. If either or both of the file names are given as `-` then the key will be printed as hexadecimal (64 bytes) with a trailing line feed (`"\n"`) to stdout instead.
+
+## Warning
+
+Only the TweetNaCl portion of this library (`tweetnacl.h` and `tweetnacl.c`) was written by professional cryptographers. Use with caution, and the understanding that no professional security audit of this library has been conducted. Please contribute a professional security audit if you are able to.
 
 ## Acknowledgements
 
