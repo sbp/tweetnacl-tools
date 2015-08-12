@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-O3 -std=c11
+CFLAGS=-O3 -std=c99 -D_POSIX_C_SOURCE=1
 TWEETNACLC=randombytes.c tools.c tweetnacl.c
 TWEETNACL=$(TWEETNACLC) randombytes.h tools.h tweetnacl.h
 
