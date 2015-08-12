@@ -1,4 +1,5 @@
 #include <fcntl.h>
+#define _POSIX_SOURCE 
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
