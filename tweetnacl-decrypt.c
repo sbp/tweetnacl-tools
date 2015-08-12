@@ -7,10 +7,10 @@
 #include "tweetnacl.h"
 
 int main(int argc, char *argv[]) {
-    if (argc != 5) error(2, "Expected %s filenames as arguments", "4");
+    if (argc != 5) error(2, "Expected 4 filenames as arguments");
 
     // This will also erroneously fail if the file "-" exists
-    if (file_exists(argv[4])) error(1, "File <%s> exists", argv[4]);
+    if (file_exists(argv[4])) errorf(1, "File <%s> exists", argv[4]);
 
     // Alice has sent to Bob, not surprisingly
     unsigned char a_public_key[crypto_box_PUBLICKEYBYTES];
@@ -27,12 +27,14 @@ int main(int argc, char *argv[]) {
 
     long esize = c.size - crypto_box_NONCEBYTES + crypto_box_BOXZEROBYTES;
     unsigned char *encrypted = malloc(esize);
+    if (encrypted == NULL) error(1, "Malloc failed!");
     memset(encrypted, 0, crypto_box_BOXZEROBYTES);
     memcpy(encrypted + crypto_box_BOXZEROBYTES,
         c.bytes + crypto_box_NONCEBYTES, esize);
 
     // Output
     unsigned char *message = malloc(esize);
+    if (message == NULL) error(1, "Malloc failed!");
     memset(message, 0, esize);
 
     // Encrypt

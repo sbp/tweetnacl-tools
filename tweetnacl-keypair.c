@@ -18,14 +18,14 @@ void output_key(char filename[], unsigned char key[], int key_size) {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc != 3) error(2, "Expected %s filenames as arguments", "2");
+    if (argc != 3) error(2, "Expected 2 filenames as arguments");
 
     unsigned char public_key[crypto_box_PUBLICKEYBYTES];
     unsigned char secret_key[crypto_box_SECRETKEYBYTES];
     crypto_box_keypair(public_key, secret_key);
 
-    if (file_exists(argv[1])) error(1, "File <%s> exists", argv[1]);
-    if (file_exists(argv[2])) error(1, "File <%s> exists", argv[2]);
+    if (file_exists(argv[1])) errorf(1, "File <%s> exists", argv[1]);
+    if (file_exists(argv[2])) errorf(1, "File <%s> exists", argv[2]);
 
     output_key(argv[1], public_key, crypto_box_PUBLICKEYBYTES);
     output_key(argv[2], secret_key, crypto_box_SECRETKEYBYTES);
