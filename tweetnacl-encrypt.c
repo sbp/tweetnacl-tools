@@ -43,9 +43,8 @@ int main(int argc, char *argv[]) {
     memcpy(padded + crypto_box_ZEROBYTES, c.bytes, c.size);
 
     // Output
-    unsigned char *encrypted = malloc(psize);
-    if (encrypted == NULL) error(1, "Malloc failed!");
-    memset(encrypted, 0, psize);
+    unsigned char *encrypted = calloc(psize, sizeof(char));
+    if (encrypted == NULL) error(1, "Calloc failed!");
 
     // Encrypt
     crypto_box(encrypted, padded, psize, nonce, b_public_key, a_secret_key);

@@ -33,9 +33,8 @@ int main(int argc, char *argv[]) {
         c.bytes + crypto_box_NONCEBYTES, esize);
 
     // Output
-    unsigned char *message = malloc(esize);
-    if (message == NULL) error(1, "Malloc failed!");
-    memset(message, 0, esize);
+    unsigned char *message = calloc(esize, sizeof(char));
+    if (message == NULL) error(1, "Calloc failed!");
 
     // Encrypt
     crypto_box_open(message, encrypted, esize,

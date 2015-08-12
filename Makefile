@@ -22,3 +22,12 @@ tweetnacl-encrypt: bin $(TWEETNACL) tweetnacl-encrypt.c
 tweetnacl-keypair: bin $(TWEETNACL) tweetnacl-keypair.c
 	$(CC) $(CFLAGS) $(TWEETNACLC) tweetnacl-keypair.c \
 		-o bin/tweetnacl-keypair
+
+test: ;
+	mkdir tmp
+	bin/tweetnacl-keypair tmp/a.pub tmp/a.sec
+	bin/tweetnacl-keypair tmp/b.pub tmp/b.sec
+	echo 'Secret message!' > tmp/message
+	bin/tweetnacl-encrypt tmp/a.sec tmp/b.pub tmp/message tmp/encrypted
+	bin/tweetnacl-decrypt tmp/a.pub tmp/b.sec tmp/encrypted -
+	rm -rf tmp
