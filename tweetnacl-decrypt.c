@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "randombytes.h"
 #include "tools.h"
 #include "tweetnacl.h"
 
@@ -30,15 +29,18 @@ int main(int argc, char *argv[]) {
     if (encrypted == NULL) error(1, "Malloc failed!");
     memset(encrypted, 0, crypto_box_BOXZEROBYTES);
     memcpy(encrypted + crypto_box_BOXZEROBYTES,
-        c.bytes + crypto_box_NONCEBYTES, esize);
+        c.bytes + crypto_box_NONCEBYTES, c.size - crypto_box_NONCEBYTES);
+    // Equivalently, esize - crypto_box_BOXZEROBYTES
+    free(c.bytes);
 
     // Output
-    unsigned char *message = calloc(esize, sizeof(char));
+    unsigned char *message = calloc(esize, sizeof(unsigned char));
     if (message == NULL) error(1, "Calloc failed!");
 
     // Encrypt
     crypto_box_open(message, encrypted, esize,
         nonce, a_public_key, b_secret_key);
+    free(encrypted);
 
     if (strcmp(argv[4], "-") != 0) {
         FILE *out = create_file(argv[4]);
@@ -49,4 +51,6 @@ int main(int argc, char *argv[]) {
         fwrite(message + crypto_box_ZEROBYTES,
                esize - crypto_box_ZEROBYTES, 1, stdout);
     }
+    free(message);
+    return 0;
 }

@@ -21,7 +21,6 @@ int main(int argc, char *argv[]) {
 
     unsigned char nonce[crypto_box_NONCEBYTES];
     randombytes(nonce, sizeof(nonce));
-    // memset(nonce, 0, sizeof(nonce));
 
     FILE *out;
     if (strcmp(argv[4], "-") != 0) {
@@ -41,13 +40,15 @@ int main(int argc, char *argv[]) {
     if (padded == NULL) error(1, "Malloc failed!");
     memset(padded, 0, crypto_box_ZEROBYTES);
     memcpy(padded + crypto_box_ZEROBYTES, c.bytes, c.size);
+    free(c.bytes);
 
     // Output
-    unsigned char *encrypted = calloc(psize, sizeof(char));
+    unsigned char *encrypted = calloc(psize, sizeof(unsigned char));
     if (encrypted == NULL) error(1, "Calloc failed!");
 
     // Encrypt
     crypto_box(encrypted, padded, psize, nonce, b_public_key, a_secret_key);
+    free(padded);
 
     if (out != stdout) {
         fwrite(encrypted + crypto_box_BOXZEROBYTES,
@@ -58,4 +59,6 @@ int main(int argc, char *argv[]) {
                (psize - crypto_box_BOXZEROBYTES) * 2, 1, out);
         fputs("\n", out);
     }
+    free(encrypted);
+    return 0;
 }
