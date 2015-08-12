@@ -53,7 +53,7 @@ void read_key(char filename[], unsigned char key[], int key_size) {
 }
 
 struct content {
-    long size;
+    size_t size;
     unsigned char *bytes;
 };
 
@@ -64,8 +64,9 @@ Content read_file(char filename[]) {
     Content c;
     if (f == 0) errorf(1, "Could not read <%s>", filename);
     fseek(f, 0, SEEK_END);
-    c.size = ftell(f);
-    if (c.size < 0) errorf(1, "Could not read <%s>", filename);
+    long size = ftell(f);
+    if (size < 0) errorf(1, "Could not read <%s>", filename);
+    c.size = (size_t)size;
     fseek(f, 0, SEEK_SET);
     c.bytes = malloc(c.size);
     if (c.bytes == NULL) error(1, "Malloc failed!");
