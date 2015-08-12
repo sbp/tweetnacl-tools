@@ -18,8 +18,12 @@ The `public.key` and `secret.key` files will contain 32 bytes each of the public
 
 ## Warning
 
-Only the TweetNaCl portion of this library (`tweetnacl.h` and `tweetnacl.c`) was written by professional cryptographers. Use with caution, and the understanding that no professional security audit of this library has been conducted. Please contribute a professional security audit if you are able to.
+Only the TweetNaCl portion of this software (`tweetnacl.h` and `tweetnacl.c`) was written by professional cryptographers. Use with caution, and the understanding that no professional security audit of this software has been conducted. This software comes with NO WARRANTY.
+
+Please contribute a professional security audit if you are able to.
 
 ## Acknowledgements
 
-This library uses the `randombytes` implementation from [@ultramancool/tweetnacl-usable](https://github.com/ultramancool/tweetnacl-usable).
+This software uses TweetNaCl version 20140427.
+
+This software uses the `randombytes` implementation from [@ultramancool/tweetnacl-usable](https://github.com/ultramancool/tweetnacl-usable).
