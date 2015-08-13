@@ -6,7 +6,8 @@
 #include "tweetnacl.h"
 
 int main(int argc, char *argv[]) {
-    if (argc != 5) error(2, "Expected 4 filenames as arguments");
+    if (argc != 5) error(2,
+        "Usage: tweetnacl-decrypt send-key.pub recv-key.sec text.enc text.txt");
 
     // This will also erroneously fail if the file "-" exists
     if (file_exists(argv[4])) errorf(1, "File <%s> exists", argv[4]);
