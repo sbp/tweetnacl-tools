@@ -1,10 +1,12 @@
 # tweetnacl-tools
 
-These are some command line tools for using [TweetNaCl](http://tweetnacl.cr.yp.to/index.html) by Prof Daniel J. Bernstein et al. There is a tool to generate public and secret Curve25519 keys called `tweetnacl-keypair`, one to encrypt data with these keys called `tweetnacl-encrypt`, and one to decrypt data with these keys called `tweetnacl-decrypt`.
+These are some command line tools for using [TweetNaCl](http://tweetnacl.cr.yp.to/index.html) by Prof Daniel J. Bernstein et al. There are three tools for encryption (make keys, encrypt, and decrypt), and three tools for signatures (make keys, sign, and verify).
 
 Type `make` to compile the tools using `gcc`. The scripts go in `bin/`.
 
-## tweetnacl-keypair
+## Encryption
+
+### tweetnacl-keypair
 
 Generates Curve25519 public and secret keys.
 
@@ -16,7 +18,7 @@ $ tweetnacl-keypair public.key secret.key
 
 The `public.key` and `secret.key` files will contain 32 bytes each of the public and secret Curve25519 keys respectively. If either or both of the file names are given as `-` then the key will be printed as hexadecimal (64 bytes) with a trailing line feed (`"\n"`) to stdout instead.
 
-## tweetnacl-encrypt
+### tweetnacl-encrypt
 
 Encrypts data using Curve25519 public and secret keys.
 
@@ -28,7 +30,7 @@ $ tweetnacl-encrypt sender.sec recipient.pub input.txt output.enc
 
 The `sender.sec` file is the Curve25519 secret key of the person sending the message. The `recipient.pub` file is the Curve25519 secret key of the person receiving the message. `input.txt` contains the content of the message to be encrypted, and `output.enc` will be created to contain the encrypted message. Using `-` for the output filename will mean hexadecimal encrypted message content will be printed instead to stdout.
 
-## tweetnacl-decrypt
+### tweetnacl-decrypt
 
 Decrypts data using Curve25519 public and secret keys.
 
@@ -40,7 +42,9 @@ $ tweetnacl-decrypt sender.pub recipient.sec input.enc output.txt
 
 The `sender.pub` file is the Curve25519 public key of the person who sent the message. The `recipient.sec` file is the Curve25519 secret key of the person who received the message. `input.enc` contains the encrypted message, and `output.txt` will be created to contain the decrypted message. Using `-` for the output filename will mean that the decrypted message content will be printed to stdout, verbatim.
 
-## tweetnacl-sigpair
+## Signatures
+
+### tweetnacl-sigpair
 
 Creates public and secret keys suitable for signing.
 
@@ -52,7 +56,7 @@ $ tweetnacl-sigpair sign.pub sign.sec
 
 The `sign.pub` file is a public signature key, used for verification; and the `sign.sec` file is the counterpart private signature key, used for signing. Using `-` for either output filename will mean that the key is printed as hexadecimal with a trailing newline to stdout.
 
-## tweetnacl-sign
+### tweetnacl-sign
 
 Signed a message using a secret signing key.
 
@@ -64,7 +68,7 @@ $ tweetnacl-sign sign.sec message.txt message.signed
 
 The `sign.sec` secret signature key is used to sign the message in `message.txt` and the output is placed into `message.signed`. If `-` is used for the output filename then it is printed verbatim to stdout.
 
-## tweetnacl-verify
+### tweetnacl-verify
 
 Verifies a signed message relative to its public signature key.
 
