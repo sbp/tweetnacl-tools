@@ -109,4 +109,4 @@ Please contribute a professional security audit if you are able to.
 
 This software uses TweetNaCl version 20140427.
 
-This software uses the `randombytes` implementation from [@ultramancool/tweetnacl-usable](https://github.com/ultramancool/tweetnacl-usable).
+This software uses the `devurandom` flavour of the `randombytes` implementation from [NaCl](http://nacl.cr.yp.to/) version 20110221.
