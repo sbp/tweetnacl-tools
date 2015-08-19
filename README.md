@@ -96,7 +96,7 @@ Secret message!
 Signing:
 
 ```shell
-$ tweetnacl-keypair sign.pub sign.sec
+$ tweetnacl-sigpair sign.pub sign.sec
 $ echo 'Verified message!' > message.txt
 $ tweetnacl-sign sign.sec message.txt message.signed
 $ tweetnacl-verify sign.pub message.signed -
