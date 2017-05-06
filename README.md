@@ -80,6 +80,17 @@ $ tweetnacl-verify sign.pub message.signed message.txt
 
 The `sign.pub` public signature key is used to verify the signed message in `message.signed`. If the signature is verified, the message is placed into `message.txt` and the program exits with successful status 0. If the signature is not verified, an error message is printed to stderr and the program exists with the unsuccessful status 0. If the signature is verified and the message output file is `-` then the message is printed to stdout.
 
+### tweetnacl-derivepubkey
+
+Derives the public key for the specified secret key
+
+Usage:
+
+```shell
+$ tweetnacl-derivepubkey key.sec key.pub
+```
+
+
 ## Example
 
 Encrypting and decrypting:
